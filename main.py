@@ -24,15 +24,15 @@ def init():
 	except:
 		print("Old Menu file could not be removed")
 	menu = open('index.html', 'a')
-	menu.write("<head><link rel='stylesheet' type='text/css' href='style.css'></head><body>")
+	menu.write("<head><link rel='stylesheet' type='text/css' href='style.css'><script language='javascript' type='text/javascript'>\n function closeWindow() { window.open('','_parent',''); window.close(); }</script></head><body>")
 	os.chdir('/usr/share/applications')
 	id=0
 	for file in glob.glob("*.desktop"):
 		entry=entryhandler.DesktopEntry(filename=file)
-		apps.append({'Name': entry.getName(), 'Icon':'system' + str(ic.getIconPath(entry.getIcon())), 'Exec':'xiwi '+entry.getExec(), 'id':id})				
+		apps.append({'Name': entry.getName(), 'Icon':'system' + str(ic.getIconPath(entry.getIcon())), 'Exec':'xiwi '+entry.getExec().split('%',1)[0], 'id':id})				
 		id=id+1
 	for app in apps:
-		menu.write("<div class='iconbox'><a href='index.html?id=" + str(app['id']) + "'><img class='icon' height='48' width='48' src='" + app['Icon'] + "'><br>" +app['Name'] + '</a></div>')
+		menu.write("<div class='iconbox'><a href='index.html?id=" + str(app['id']) + "' onclick='closeWindow()'><img class='icon' height='48' width='48' src='" + app['Icon'] + "'>" +app['Name'] + '</a></div>')
 	menu.write('</body>')
 	menu.close()
 
@@ -51,7 +51,7 @@ def serve():
 			if params:
 				for app in apps:
 					if str(app['id']) == str(params['id']).strip("/"):
-						print(app['Name'])
+						print(app['Name'], " EXEC : ",app['Exec'])
 						os.system(app['Exec']+'&')
 			http.server.SimpleHTTPRequestHandler.do_GET(self)
 
