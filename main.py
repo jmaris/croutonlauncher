@@ -24,7 +24,7 @@ def init():
 	except:
 		print("Old Menu file could not be removed")
 	menu = open('index.html', 'a')
-	menu.write("<head><link rel='stylesheet' type='text/css' href='style.css'><script language='javascript' type='text/javascript'>\n function closeWindow() { window.open('','_parent',''); window.close(); }</script></head><body>")
+	menu.write("<head><script src='list.min.js'></script><link rel='stylesheet' type='text/css' href='style.css'><script language='javascript' type='text/javascript'>\n function closeWindow() { window.open('','_parent',''); window.close(); }</script><script language='javascript' type='text/javascript'>function startList() {var options = {valueNames: [ 'name']};var userList = new List('users', options);}</script></head><body onload='startList()'><div id='users'><input class='search' placeholder='Search' /><button class='sort' data-sort='name'>Sort by name</button><ul class='list'>")
 	os.chdir('/usr/share/applications')
 	id=0
 	for file in glob.glob("*.desktop"):
@@ -32,8 +32,8 @@ def init():
 		apps.append({'Name': entry.getName(), 'Icon':'system' + str(ic.getIconPath(entry.getIcon())), 'Exec':'xiwi '+entry.getExec().split('%',1)[0], 'id':id})				
 		id=id+1
 	for app in apps:
-		menu.write("<div class='iconbox'><a href='index.html?id=" + str(app['id']) + "' onclick='closeWindow()'><img class='icon' height='48' width='48' src='" + app['Icon'] + "'>" +app['Name'] + '</a></div>')
-	menu.write('</body>')
+		menu.write("<li><a class='name' href='index.html?id=" + str(app['id']) + "' onclick='closeWindow()'><img class='icon' height='48' width='48' src='" + app['Icon'] + "'>" +app['Name'] + '</a></li>')
+	menu.write('</div></body>')
 	menu.close()
 
 def serve():

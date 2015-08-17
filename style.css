@@ -1,15 +1,5 @@
 html {
 background-color:#ececec;
-line-height:120px;
-}
-.iconbox{
-	line-height:30px;
-	text-align:left;
-	width:100%;
-	overflow:hidden;
-	border-color:#ffffff;
-	border-bottom-style:solid;
-	border-bottom-width:1px;
 }
 .icon{
 display:inline-block;
@@ -22,5 +12,5 @@ a{
 	text-decoration:none;
 	color:#000000;
 	font-family:sans-serif;
-	display:inline-block;
 }
+li {padding:5px;}
