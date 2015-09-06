@@ -8,7 +8,7 @@ sudo apt-get install python3 python3-xdg git
 ```
 2. Download the Software
 ```
-git clone git@github.com:jmaris/croutonlauncher.git
+git clone https://github.com/jmaris/croutonlauncher.git
 cd croutonlauncher
 ```
 3. Make a Systemlink (This is because the python web server needs to be able to serve content above the directory it is running in, this is not obligatory but you will not see icons if you do not create the link)
